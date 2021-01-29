@@ -14,46 +14,48 @@ class App extends StatefulWidget {
 class MainState extends State {
   var _currentIndex = 0;
 
-//   PageOne p1;
+  PageOne p1;
 
-//   PageTwo p2;
+  PageTwo p2;
 
-//   PageThree p3;
+  PageThree p3;
 
-//   PageFour p4;
-//   currentPage() {
-//     switch (_currentIndex) {
-//       case 0:
-//         if (p1 == null) {
-//           p1 = new PageOne();
-//         }
+  PageFour p4;
+  currentPage() {
+    switch (_currentIndex) {
+      case 0:
+        // if (p1 == null) {
+        //   p1 = new PageOne();
+        // }
 
-//         return p1;
+        // return p1;
+        break;
 
-//       case 1:
-//         if (p2 == null) {
-//           p2 = new PageTwo();
-//         }
+      case 1:
+        if (p2 == null) {
+          p2 = new PageTwo();
+        }
 
-//         return p2;
+        return p2;
 
-//       case 2:
-//         if (p3 == null) {
-//           p3 = new PageThree();
-//         }
+      case 2:
+        if (p3 == null) {
+          p3 = new PageThree();
+        }
 
-//         return p3;
+        return p3;
 
-//       case 3:
-//         if (p4 == null) {
-//           p4 = new PageFour();
-//         }
+      case 3:
+        if (p4 == null) {
+          p4 = new PageFour();
+        }
 
-//         return p4;
+        return p4;
 
-//       default;
-//     }
-//   }
+      default:
+        ;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,6 @@ class MainState extends State {
               )),
         ],
       ),
-
       bottomNavigationBar: new BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: 0,
@@ -133,7 +134,7 @@ class MainState extends State {
           ),
         ],
       ),
-      //   body: currentPage(),
+      body: currentPage(),
     );
   }
 }
