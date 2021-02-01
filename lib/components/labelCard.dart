@@ -26,10 +26,14 @@ class LabelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().initialize(context);
-    // return Stack(
-    //     //   alignment: AlignmentGeometry,
-    //     );
-    // return createCard();
+    if (this.isCard) {
+      return buildCard();
+    } else {
+      return buildLabel();
+    }
+  }
+
+  Widget buildCard() {
     return Container(
       child: Stack(
         children: <Widget>[
@@ -108,58 +112,81 @@ class LabelCard extends StatelessWidget {
     );
   }
 
-  createCard() {
-    if (this.isCard) {
-      print('yes');
-      buildCard();
-    } else {
-      buildLabel();
-    }
-  }
-
-  Widget buildCard() {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          // 图标定位
-          Positioned(
-              child: Image.asset('images/xhl.png'),
-              // width: this.cardWidth / ,
-              left: this.cardWidth / 20,
-              top: this.cardHeight / 10),
-          // 标题定位
-          // Positioned(child: null),
-          // 详情定位
-          // Positioned(child: null),
-          // button定位
-          // Positioned(child: null),
-        ],
-        alignment: Alignment.topLeft,
-      ),
-      decoration: new BoxDecoration(
-        color: this.cardColor,
-      ),
-      height: this.cardHeight,
-      width: this.cardWidth,
-    );
-  }
-
   buildLabel() {
     return Container(
         child: Stack(
           children: <Widget>[
             // 图标定位
             Positioned(
+              child: Container(
                 child: this.icon,
-                // width: this.cardWidth / ,
-                left: this.cardWidth / 20,
-                top: this.cardHeight / 10),
+                height: this.cardHeight * 0.9,
+                width: this.cardHeight * 0.9,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                        color: Colors.red,
+                        width: 0.5,
+                        style: BorderStyle.solid)),
+              ),
+              left: this.cardHeight * 0.05,
+              top: this.cardHeight * 0.05,
+            ),
+
             // 标题定位
-            Positioned(child: Text(this.title)),
+            Positioned(
+              child: Container(
+                child: Text(this.title),
+                height: this.cardHeight * 0.47,
+                width: this.cardWidth * 0.6,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                        color: Colors.red,
+                        width: 0.5,
+                        style: BorderStyle.solid)),
+              ),
+              left: this.cardHeight * 0.9 + this.cardHeight * 0.1,
+              top: this.cardHeight * 0.02,
+            ),
+
             // 详情定位
-            Positioned(child: Text(this.description)),
+            Positioned(
+              child: Container(
+                child: Text(this.description),
+                width: this.cardWidth * 0.6,
+                height: this.cardHeight * 0.47,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                        color: Colors.red,
+                        width: 0.5,
+                        style: BorderStyle.solid)),
+              ),
+              left: this.cardHeight * 0.9 + this.cardHeight * 0.1,
+              bottom: this.cardHeight * 0.02,
+            ),
             // button定位
-            // Positioned(child: null),
+            Positioned(
+              child: Container(
+                child: GestureDetector(
+                  onTap: () {
+                    print('Do something else');
+                  },
+                  child: Icon(Icons.favorite),
+                ),
+                width: this.cardHeight * 0.3,
+                height: this.cardHeight * 0.3,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                        color: Colors.red,
+                        width: 0.5,
+                        style: BorderStyle.solid)),
+              ),
+              right: this.cardHeight * 0.05,
+              top: this.cardHeight * 0.05,
+            ),
           ],
         ),
         height: this.cardHeight,
