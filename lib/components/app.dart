@@ -3,6 +3,7 @@ import 'package:poke_dex/pages/page1.dart';
 import 'package:poke_dex/pages/page2.dart';
 import 'package:poke_dex/pages/page3.dart';
 import 'package:poke_dex/pages/page4.dart';
+import 'package:poke_dex/components/sizeConfig.dart';
 
 enum ItemType { a, b, c, d }
 
@@ -35,21 +36,18 @@ class MainState extends State {
         if (p2 == null) {
           p2 = new PageTwo();
         }
-
         return p2;
 
       case 2:
         if (p3 == null) {
           p3 = new PageThree();
         }
-
         return p3;
 
       case 3:
         if (p4 == null) {
           p4 = new PageFour();
         }
-
         return p4;
 
       default:
@@ -59,6 +57,7 @@ class MainState extends State {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().initialize(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -74,7 +73,7 @@ class MainState extends State {
             ),
           ),
           Padding(
-              padding: const EdgeInsets.only(left: 30.0, right: 20.0),
+              padding: EdgeInsets.only(left: 25.0, right: 20.0),
               child: GestureDetector(
                 onTap: () {
                   print('Do something else');
@@ -99,8 +98,12 @@ class MainState extends State {
                         ? Color(0xff46c01b)
                         : Color(0xff999999))),
             icon: _currentIndex == 0
-                ? Image.asset('images/PC.png', width: 32.0, height: 28.0)
-                : Image.asset('images/xhl.png', width: 32.0, height: 28.0),
+                ? Image.asset('images/PC.png',
+                    width: SizeConfig.widthPercent(20),
+                    height: SizeConfig.heightPercent(3))
+                : Image.asset('images/xhl.png',
+                    width: SizeConfig.widthPercent(20),
+                    height: SizeConfig.heightPercent(3)),
           ),
           new BottomNavigationBarItem(
             title: new Text('num: 2',
@@ -109,8 +112,12 @@ class MainState extends State {
                         ? Color(0xff46c01b)
                         : Color(0xff999999))),
             icon: _currentIndex == 1
-                ? Image.asset('images/PC.png', width: 32.0, height: 28.0)
-                : Image.asset('images/grw.png', width: 32.0, height: 28.0),
+                ? Image.asset('images/PC.png',
+                    width: SizeConfig.widthPercent(20),
+                    height: SizeConfig.heightPercent(3))
+                : Image.asset('images/grw.png',
+                    width: SizeConfig.widthPercent(20),
+                    height: SizeConfig.heightPercent(3)),
           ),
           new BottomNavigationBarItem(
             title: new Text('num: 3',
@@ -119,8 +126,12 @@ class MainState extends State {
                         ? Color(0xff46c01b)
                         : Color(0xff999999))),
             icon: _currentIndex == 2
-                ? Image.asset('images/PC.png', width: 32.0, height: 28.0)
-                : Image.asset('images/abl.png', width: 32.0, height: 28.0),
+                ? Image.asset('images/PC.png',
+                    width: SizeConfig.widthPercent(20),
+                    height: SizeConfig.heightPercent(3))
+                : Image.asset('images/abl.png',
+                    width: SizeConfig.widthPercent(20),
+                    height: SizeConfig.heightPercent(3)),
           ),
           new BottomNavigationBarItem(
             title: new Text('num: 4',
@@ -129,8 +140,12 @@ class MainState extends State {
                         ? Color(0xff46c01b)
                         : Color(0xff999999))),
             icon: _currentIndex == 3
-                ? Image.asset('images/PC.png', width: 32.0, height: 28.0)
-                : Image.asset('images/wxkd.png', width: 32.0, height: 28.0),
+                ? Image.asset('images/PC.png',
+                    width: SizeConfig.widthPercent(20),
+                    height: SizeConfig.heightPercent(3))
+                : Image.asset('images/wxkd.png',
+                    width: SizeConfig.widthPercent(20),
+                    height: SizeConfig.heightPercent(3)),
           ),
         ],
       ),
