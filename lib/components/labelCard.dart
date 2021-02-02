@@ -106,10 +106,10 @@ class LabelCard extends StatelessWidget {
               width: this.cardWidth * 0.25,
               height: this.cardWidth * 0.25,
               decoration: BoxDecoration(
-                color: Colors.white,
-                //   border: Border.all(
-                //   color: Colors.red, width: 0.5, style: BorderStyle.solid)
-              ),
+                  // color: Colors.white,
+                  //   border: Border.all(
+                  //   color: Colors.red, width: 0.5, style: BorderStyle.solid)
+                  ),
             ),
             right: this.cardWidth / 20,
             top: this.cardWidth / 20,
@@ -201,12 +201,12 @@ class LabelCard extends StatelessWidget {
                 width: this.cardHeight * 0.3,
                 height: this.cardHeight * 0.3,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  // border: Border.all(
-                  // color: Colors.red,
-                  // width: 0.5,
-                  // style: BorderStyle.solid)
-                ),
+                    //   color: Colors.white,
+                    // border: Border.all(
+                    // color: Colors.red,
+                    // width: 0.5,
+                    // style: BorderStyle.solid)
+                    ),
               ),
               right: this.cardHeight * 0.05,
               top: this.cardHeight * 0.05,

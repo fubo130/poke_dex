@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:poke_dex/components/sizeConfig.dart';
 import 'package:poke_dex/components/cardList.dart';
+import 'package:poke_dex/data/pokemon.dart';
 
 class PageTwo extends StatefulWidget {
   MyState createState() => MyState();
 }
 
 class MyState extends State {
-//   bool isCard = true;
+  // nums: 默认每行显示4个card
   int nums = 4;
 
   @override
@@ -21,6 +22,7 @@ class MyState extends State {
           GestureDetector(
             onTap: () {
               print('layout isCard');
+              Pokemon p = Pokemon(3);
             },
             child: Icon(
               Icons.filter_list,

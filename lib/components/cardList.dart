@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:poke_dex/components/sizeConfig.dart';
 import 'package:poke_dex/components/labelCard.dart';
+import 'package:poke_dex/data/pokemon.dart';
 
 class CardList extends StatefulWidget {
   final int nums;
@@ -18,58 +23,73 @@ class CardListState extends State<CardList> {
   double margin, gap, cardWidth, cardHeight;
   // isCard: 对内容是否为card进行判断
   bool isCard;
-// list: 卡片组
+  // list: 卡片组
   List<LabelCard> list = [];
 
+  // 初始化各项数据
   initialize() {
-    print('change');
     setNumPerRow(widget.nums);
     setLayout();
     initList();
   }
 
-  initList() {
-    for (int i = 0; i < 50; i++) {
-      if (i % 4 == 0) {
-        this.list.add(LabelCard(
-              cardColor: Colors.indigo,
-              cardWidth: this.cardWidth,
-              cardHeight: this.cardHeight,
-              icon: Image.asset('images/xhl.png'),
-              title: '小火龙',
-              description: '这是一只小火龙',
-              isCard: this.isCard,
-            ));
-      } else if (i % 4 == 1) {
-        this.list.add(LabelCard(
-              cardColor: Colors.indigo,
-              cardWidth: this.cardWidth,
-              cardHeight: this.cardHeight,
-              icon: Image.asset('images/abl.png'),
-              title: '艾比郎',
-              description: '这是一只艾比郎',
-              isCard: this.isCard,
-            ));
-      } else if (i % 4 == 2) {
-        this.list.add(LabelCard(
-              cardColor: Colors.indigo,
-              cardWidth: this.cardWidth,
-              cardHeight: this.cardHeight,
-              icon: Image.asset('images/grw.png'),
-              title: '果然翁',
-              description: '这是一只果然翁',
-              isCard: this.isCard,
-            ));
-      } else if (i % 4 == 3) {
-        this.list.add(LabelCard(
+  // 初始化list数据（fake data）
+  initList() async {
+    // String str = await rootBundle.loadString('data/pokeList');
+    // print(str);
+    // var arr = str.split(',');
+    for (int i = 0; i < 898; i++) {
+      var x = i + 1;
+      this.list.add(LabelCard(
             cardColor: Colors.indigo,
             cardWidth: this.cardWidth,
             cardHeight: this.cardHeight,
-            icon: Image.asset('images/wxkd.png'),
-            title: '蚊香蝌蚪',
-            description: '这是一只蚊香蝌蚪',
-            isCard: this.isCard));
-      }
+            icon: Image.network(
+                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/$x.png'),
+            title: 'No: $x',
+            description: 'arr[i]',
+            isCard: this.isCard,
+          ));
+      //   if (i % 4 == 0) {
+      //     this.list.add(LabelCard(
+      //           cardColor: Colors.indigo,
+      //           cardWidth: this.cardWidth,
+      //           cardHeight: this.cardHeight,
+      //           icon: Image.asset('images/xhl.png'),
+      //           title: 'No: $i 小火龙',
+      //           description: '这是一只小火龙',
+      //           isCard: this.isCard,
+      //         ));
+      //   } else if (i % 4 == 1) {
+      //     this.list.add(LabelCard(
+      //           cardColor: Colors.indigo,
+      //           cardWidth: this.cardWidth,
+      //           cardHeight: this.cardHeight,
+      //           icon: Image.asset('images/abl.png'),
+      //           title: 'No: $i 艾比郎',
+      //           description: '这是一只艾比郎',
+      //           isCard: this.isCard,
+      //         ));
+      //   } else if (i % 4 == 2) {
+      //     this.list.add(LabelCard(
+      //           cardColor: Colors.indigo,
+      //           cardWidth: this.cardWidth,
+      //           cardHeight: this.cardHeight,
+      //           icon: Image.asset('images/grw.png'),
+      //           title: 'No: $i 果然翁',
+      //           description: '这是一只果然翁',
+      //           isCard: this.isCard,
+      //         ));
+      //   } else if (i % 4 == 3) {
+      //     this.list.add(LabelCard(
+      //         cardColor: Colors.indigo,
+      //         cardWidth: this.cardWidth,
+      //         cardHeight: this.cardHeight,
+      //         icon: Image.asset('images/wxkd.png'),
+      //         title: 'No: $i 蚊香蝌蚪',
+      //         description: '这是一只蚊香蝌蚪',
+      //         isCard: this.isCard));
+      //   }
     }
   }
 
@@ -94,6 +114,7 @@ class CardListState extends State<CardList> {
     );
   }
 
+  // 设置每行显示卡片数量
   setNumPerRow(int num) {
     this.setState(() {
       this.numPerRow = num;
@@ -101,6 +122,7 @@ class CardListState extends State<CardList> {
     });
   }
 
+  // 根据每行卡片数量决定页面布局
   setLayout() {
     switch (numPerRow) {
       case 1:
