@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,8 +7,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:poke_dex/components/sizeConfig.dart';
 import 'package:poke_dex/components/labelCard.dart';
 import 'package:poke_dex/data/pokemon.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CardList extends StatefulWidget {
+  // nums: 外界传入的每行显示card数量
   final int nums;
   CardList({Key key, @required this.nums}) : super(key: key);
   @override
@@ -35,62 +38,41 @@ class CardListState extends State<CardList> {
 
   // 初始化list数据（fake data）
   initList() async {
-    // String str = await rootBundle.loadString('data/pokeList');
-    // print(str);
-    // var arr = str.split(',');
+    // pokemon名称list
+    var arr;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    // 首次读取数据
+    if (!preferences.containsKey('pokemonList')) {
+      // 读取本地pokemon名称文件
+      String str = await rootBundle.loadString('data/pokeList');
+      arr = str.split(',');
+      // 保存数据到本地
+      preferences.setStringList('pokemonList', arr);
+    } else {
+      // 读取本地数据
+      arr = preferences.getStringList('pokemonList');
+    }
+
     for (int i = 0; i < 898; i++) {
       var x = i + 1;
       this.list.add(LabelCard(
             cardColor: Colors.indigo,
             cardWidth: this.cardWidth,
             cardHeight: this.cardHeight,
-            icon: Image.network(
-                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/$x.png'),
+            imageURL:
+                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/$x.png',
             title: 'No: $x',
-            description: 'arr[i]',
+            description: arr[i],
             isCard: this.isCard,
           ));
-      //   if (i % 4 == 0) {
-      //     this.list.add(LabelCard(
-      //           cardColor: Colors.indigo,
-      //           cardWidth: this.cardWidth,
-      //           cardHeight: this.cardHeight,
-      //           icon: Image.asset('images/xhl.png'),
-      //           title: 'No: $i 小火龙',
-      //           description: '这是一只小火龙',
-      //           isCard: this.isCard,
-      //         ));
-      //   } else if (i % 4 == 1) {
-      //     this.list.add(LabelCard(
-      //           cardColor: Colors.indigo,
-      //           cardWidth: this.cardWidth,
-      //           cardHeight: this.cardHeight,
-      //           icon: Image.asset('images/abl.png'),
-      //           title: 'No: $i 艾比郎',
-      //           description: '这是一只艾比郎',
-      //           isCard: this.isCard,
-      //         ));
-      //   } else if (i % 4 == 2) {
-      //     this.list.add(LabelCard(
-      //           cardColor: Colors.indigo,
-      //           cardWidth: this.cardWidth,
-      //           cardHeight: this.cardHeight,
-      //           icon: Image.asset('images/grw.png'),
-      //           title: 'No: $i 果然翁',
-      //           description: '这是一只果然翁',
-      //           isCard: this.isCard,
-      //         ));
-      //   } else if (i % 4 == 3) {
-      //     this.list.add(LabelCard(
-      //         cardColor: Colors.indigo,
-      //         cardWidth: this.cardWidth,
-      //         cardHeight: this.cardHeight,
-      //         icon: Image.asset('images/wxkd.png'),
-      //         title: 'No: $i 蚊香蝌蚪',
-      //         description: '这是一只蚊香蝌蚪',
-      //         isCard: this.isCard));
-      //   }
     }
+  }
+
+  @override
+  void initState() async {
+    super.initState();
+    String str = await rootBundle.loadString('data/pokeList');
+    widget.names = str.split(',');
   }
 
   @override

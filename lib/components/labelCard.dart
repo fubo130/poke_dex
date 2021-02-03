@@ -3,10 +3,10 @@ import 'package:poke_dex/components/sizeConfig.dart';
 
 class LabelCard extends StatelessWidget {
   // icon: 卡片显示的图片
-  final Image icon;
+  FadeInImage icon;
   // title: 卡片显示内容的标题
   // description: 卡片显示内容的详细信息
-  final String title, description;
+  final String title, description, imageURL;
   // cardWidth, cardHeight: 卡片宽高
   final double cardWidth, cardHeight;
   // cardColor: 卡片背景颜色
@@ -14,19 +14,22 @@ class LabelCard extends StatelessWidget {
   // isCard: 判断卡片种类
   final bool isCard;
 
-  LabelCard({
-    @required this.icon,
-    @required this.title,
-    @required this.description,
-    @required this.cardWidth,
-    @required this.cardHeight,
-    @required this.cardColor,
-    @required this.isCard,
-  });
+  LabelCard(
+      {
+      // @required this.icon,
+      @required this.title,
+      @required this.description,
+      @required this.cardWidth,
+      @required this.cardHeight,
+      @required this.cardColor,
+      @required this.isCard,
+      @required this.imageURL});
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().initialize(context);
+    this.icon = FadeInImage.assetNetwork(
+        placeholder: 'images/loading.gif', image: this.imageURL);
     if (this.isCard) {
       return buildCard();
     } else {
