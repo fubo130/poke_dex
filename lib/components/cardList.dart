@@ -40,6 +40,7 @@ class CardListState extends State<CardList> {
   initList() async {
     // pokemon名称list
     var arr;
+    // List<LabelCard> array = [];
     SharedPreferences preferences = await SharedPreferences.getInstance();
     // 首次读取数据
     if (!preferences.containsKey('pokemonList')) {
@@ -66,13 +67,9 @@ class CardListState extends State<CardList> {
             isCard: this.isCard,
           ));
     }
-  }
-
-  @override
-  void initState() async {
-    super.initState();
-    String str = await rootBundle.loadString('data/pokeList');
-    widget.names = str.split(',');
+    // this.setState(() {
+    //   this.list = List.from(array);
+    // });
   }
 
   @override
